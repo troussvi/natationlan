@@ -16,16 +16,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <button class="orbit-previous" aria-label="previous"><span class="show-for-sr">Previous Slide</span>&#9664;</button>
         <button class="orbit-next" aria-label="next"><span class="show-for-sr">Next Slide</span>&#9654;</button>
         <li class="orbit-slide is-active">
-          <img src="http://placehold.it/2000x250">
+          <img src="http://medias.legrandbornand-reservation.com/images/info_pages/multitailles/1920x1440_banniere-sejour-piscine-1413.jpg">
         </li>
         <li class="orbit-slide">
-          <img src="http://placehold.it/2000x250">
+          <img src="http://medias.legrandbornand-reservation.com/images/info_pages/multitailles/1920x1440_banniere-sejour-piscine-1413.jpg">
         </li>
         <li class="orbit-slide">
-          <img src="http://placehold.it/2000x250">
+          <img src="http://medias.legrandbornand-reservation.com/images/info_pages/multitailles/1920x1440_banniere-sejour-piscine-1413.jpg">
         </li>
         <li class="orbit-slide">
-          <img src="http://placehold.it/2000x250">
+          <img src="http://medias.legrandbornand-reservation.com/images/info_pages/multitailles/1920x1440_banniere-sejour-piscine-1413.jpg">
         </li>
       </ul>
     </div>
