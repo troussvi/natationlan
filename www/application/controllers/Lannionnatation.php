@@ -14,6 +14,8 @@ $this->load->library('session');
 
 }
 
+// ------------------------------------------------------------------------
+
 public function accueil(){
 	
 	$data['content']='accueil';
@@ -26,6 +28,8 @@ public function accueil(){
 	
 }
 
+// ------------------------------------------------------------------------
+
 public function deconnexion(){
 	$this->session->sess_destroy();
     $this->session->set_userdata('login',NULL);
@@ -33,6 +37,8 @@ public function deconnexion(){
 	
 	
 }
+
+// ------------------------------------------------------------------------
 
 public function inscription(){
 	
@@ -86,6 +92,8 @@ public function inscription(){
 	
 	
 }
+
+// ------------------------------------------------------------------------
 
 public function connexion(){
 
@@ -144,4 +152,29 @@ public function connexion(){
   
   
 }
+
+// ------------------------------------------------------------------------
+
+class nageurs extends CI_Controller
+{
+    public function __construct()
+    {
+        parent::__construct();
+          
+        $this->load->database();
+        $this->load->model('Nageur_model');
+    }
+          
+// ------------------------------------------------------------------------
+
+     
+    //  On charge la vue
+    $data['content'] = 'vue_nageur';
+    $this->load->view('template/template', $data);
+    }
+
+// ------------------------------------------------------------------------
+
+
+
  ?>
