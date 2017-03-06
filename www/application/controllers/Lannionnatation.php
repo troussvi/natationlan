@@ -169,7 +169,7 @@ class nageurs extends CI_Controller
 
      
     //  On charge la vue
-    $data['content'] = 'vue_nageur';
+    $data['content'] = 'liste_nageur';
     $this->load->view('template/template', $data);
     }
 
