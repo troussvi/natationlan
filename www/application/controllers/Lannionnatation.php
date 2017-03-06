@@ -164,14 +164,11 @@ class nageurs extends CI_Controller
         $this->load->database();
         $this->load->model('Nageur_model');
     }
-          
-// ------------------------------------------------------------------------
 
      
     //  On charge la vue
-    $data['content'] = 'liste_nageur';
-    $this->load->view('template/$data', $data);
-    }
+    $this->load->view('template/liste_nageur');
+}
 
 // ------------------------------------------------------------------------
 
