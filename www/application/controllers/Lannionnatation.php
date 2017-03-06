@@ -6,7 +6,7 @@ public function __construct()
 parent::__construct();
 /* On chargera ici les modèles qu'on désire*/
 $this->load->model('User_model');
-  
+ $this->load->model('Privileges_model');
 /*On importe la librairie session*/
 $this->load->library('session');
 
@@ -86,6 +86,28 @@ public function inscription(){
 	
 	
 }
+public function enattente(){
+	
+		$res = $this
+					 ->Privileges_model
+					 ->Utilisateur();
+	
+	$date['user']=$res;
+    $data['content']='enattente';
+    $data['title']='enattente';
+    $this->load->vars($data);
+    $this->load->view('template');
+    	   
+	
+	
+	
+	
+	
+	
+}
+
+
+
 
 public function connexion(){
 
@@ -101,17 +123,26 @@ public function connexion(){
 
 	/*On vérifie les param en les envoyant modèle User*/
 	$this->load->model('User_model');
-        $res = $this
+	$this->load->model('Privileges_model');
+	$res = $this
                  ->User_model
                  ->verify_user(
                     $this->input->post('email'),
                     $this->input->post('password')
                  );
+				 
+	$info=$this
+				->Privileges_model
+				->Utilisateur(
+					$this->input->post('email'),
+					$this->input->post('password')			
+				);
         
 	/*Si le membre existe*/
         if ( $res == true ) { 
         
 		/*On initialise des variables de session*/
+		$this->session->set_userdata('statut',$res['statut']);
 		  $this->session->set_userdata('login', $this->input->post('email'));
 		/*On redirige vers l'accueil*/
           $data['content']='accueil';
