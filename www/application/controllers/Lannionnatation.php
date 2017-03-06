@@ -14,6 +14,8 @@ $this->load->library('session');
 
 }
 
+// ------------------------------------------------------------------------
+
 public function accueil(){
 	
 	$data['content']='accueil';
@@ -26,6 +28,8 @@ public function accueil(){
 	
 }
 
+// ------------------------------------------------------------------------
+
 public function deconnexion(){
 	$this->session->sess_destroy();
     $this->session->set_userdata('login',NULL);
@@ -33,6 +37,8 @@ public function deconnexion(){
 	
 	
 }
+
+// ------------------------------------------------------------------------
 
 public function inscription(){
 	
@@ -109,6 +115,8 @@ public function enattente(){
 
 
 
+// ------------------------------------------------------------------------
+
 public function connexion(){
 
 	/*On utilise le module code igniter spécifique aux formulaires*/
@@ -175,4 +183,10 @@ public function connexion(){
   
   
 }
+
+// ------------------------------------------------------------------------
+
+
+
+
  ?>
