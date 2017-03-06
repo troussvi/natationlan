@@ -155,22 +155,6 @@ public function connexion(){
 
 // ------------------------------------------------------------------------
 
-class nageurs extends CI_Controller
-{
-    public function __construct()
-    {
-        parent::__construct();
-          
-        $this->load->database();
-        $this->load->model('Nageur_model');
-    }
-
-     
-    //  On charge la vue
-    $this->load->view('liste_nageur');
-}
-
-// ------------------------------------------------------------------------
 
 
 
