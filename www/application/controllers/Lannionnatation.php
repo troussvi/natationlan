@@ -37,16 +37,15 @@ public function deconnexion(){
 public function inscription(){
 	
 
-
-	$this->load->library('form_validation');
+    $this->load->library(array('form_validation'));
     $this->form_validation->set_rules('email', 'Email', 'required|is_unique[_utilisateurs.email]');
     $this->form_validation->set_rules('password', 'Mot de passe', 'required|min_length[4]');
     $this->form_validation->set_rules('password2', 'Mot de passe', 'required|min_length[4]');
-	
+
 
 	 
 	 
-      if ( $this->form_validation->run() !== false ) {
+      if ( $this->form_validation->run() !== false) {
         // then validation passed. Get from db
         $this->load->model('Inscription_model');
 		if(($this->input->post('password')==$this->input->post('password2'))){
@@ -68,14 +67,14 @@ public function inscription(){
 						return 0;
 				}
 		}
-		else{
-				
-			$data['notif']='<blockquote class="container">Les deux mots de passe doivent être identiques</blockquote>';
+						else{
+								
+							$data['notif']='<blockquote class="container">Les deux mots de passe doivent être identiques</blockquote>';
 
-				
-		}
+								
+						}
 	  }
-		
+	
     
 	
     $data['content']='inscription';
