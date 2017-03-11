@@ -33,9 +33,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="top-bar">
       <div class="top-bar-left">
         <ul class="menu">
-          <li class="menu-text">Lannion natation</li>
+		
+		
+          <li class="menu-text"><a href="/natationlan/www/index.php/lannionnatation/accueil">Lannion natation</a></li>
           <li><a href="#">Liste des nageurs</a></li>
           <li><a href="#">Record du club</a></li>
+		 <?php 			
+		 
+	
+		 if($this->session->userdata('statut')!==null){
+					
+					
+			echo'<li><a href="/natationlan/www/index.php/lannionnatation/enattente">En attente</a></li>';
+			
+					
+					
+		 }
+				
+		?>
         </ul>
       </div>
       <div class="top-bar-right">
@@ -43,14 +58,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php
 			if($this->session->userdata('login')!==null){
 				
-				echo'<li>Connecté en temps que '.$this->session->userdata("login").'</li>';	  
-				echo'<li><a href="/index.php/lannionnatation/deconnexion" class="button" style="background-color: #008CBA">Déconnexion</a></li>';
+				echo'<li>Connecté en temps que '.$this->session->userdata("login").'</li>';	 
+				
+				echo'<li><a href="/natationlan/www/index.php/lannionnatation/deconnexion" class="button" style="background-color: #008CBA">Déconnexion</a></li>';
+				
+	
+				
 			}
 		
 			else{
-				echo'<li><a href="/index.php/lannionnatation/inscription" class="button" style="background-color: #008CBA">Inscription</a></li>';
-				echo'<li><a href="/index.php/lannionnatation/connexion" class="button" style="background-color: #008CBA">Connexion</a></li>';
+				echo'<li><a href="/natationlan/www/index.php/lannionnatation/inscription" class="button" style="background-color: #008CBA">Inscription</a></li>';
+				echo'<li><a href="/natationlan/www/index.php/lannionnatation/connexion" class="button" style="background-color: #008CBA">Connexion</a></li>';
 			}
+			
+			
+			
 	  ?>
 		
         </ul>

@@ -14,8 +14,6 @@ $this->load->library('session');
 
 }
 
-// ------------------------------------------------------------------------
-
 public function accueil(){
 	
 	$data['content']='accueil';
@@ -28,32 +26,30 @@ public function accueil(){
 	
 }
 
-// ------------------------------------------------------------------------
-
 public function deconnexion(){
 	$this->session->sess_destroy();
     $this->session->set_userdata('login',NULL);
+	$this->session->set_userdata('statut',NULL);
+
 	$this->accueil();
 	
 	
 }
 
-// ------------------------------------------------------------------------
-
 public function inscription(){
 	
-
+	$this->load->library('encryption');
     $this->load->library(array('form_validation'));
     $this->form_validation->set_rules('email', 'Email', 'required|is_unique[_utilisateurs.email]');
-    $this->form_validation->set_rules('password', 'Mot de passe', 'required|min_length[4]');
-    $this->form_validation->set_rules('password2', 'Mot de passe', 'required|min_length[4]');
+    $this->form_validation->set_rules('password', 'Mot de passe', 'required|min_length[6]');
+    $this->form_validation->set_rules('password2', 'Mot de passe', 'required|min_length[6]');
 
 
 	 
 	 
       if ( $this->form_validation->run() !== false) {
-        // then validation passed. Get from db
-        $this->load->model('Inscription_model');
+
+	  $this->load->model('Inscription_model');
 		if(($this->input->post('password')==$this->input->post('password2'))){
 
 			$res = $this
@@ -94,11 +90,61 @@ public function inscription(){
 }
 public function enattente(){
 	
+	$this->load->library('form_validation');
+	$this->load->model('Gestion_model');
+
+	
 		$res = $this
 					 ->Privileges_model
 					 ->Utilisateur();
 	
-	$date['user']=$res;
+
+	
+	
+		
+		if($this->input->post('accepter')!==null){
+						 
+			$res = $this
+                 ->Gestion_model
+                 ->gestion(
+                    $this->input->post('email'),
+					$this->input->post('nom'),
+					$this->input->post('prenom'),
+                    1
+                 );
+				 
+		
+			$nom=$this->input->post('nom');
+			$prenom=$this->input->post('prenom');
+			$notif="$nom $prenom a été acceptée ";
+			$data['notif']=$notif;	 
+	
+			
+		}
+	
+		if($this->input->post('refuser')!==null){
+			
+		$res = $this
+                 ->Gestion_model
+                 ->gestion(
+                    $this->input->post('email'),
+					$this->input->post('nom'),
+					$this->input->post('prenom'),
+                    0
+                 );
+				 
+		$nom=$this->input->post('nom');
+		$prenom=$this->input->post('prenom');
+		$notif="$nom $prenom a été acceptée ";
+		$data['notif']=$notif;	 
+		}
+	
+		
+
+	
+	
+	
+	$data['user']=$res;
     $data['content']='enattente';
     $data['title']='enattente';
     $this->load->vars($data);
@@ -115,14 +161,12 @@ public function enattente(){
 
 
 
-// ------------------------------------------------------------------------
-
 public function connexion(){
 
 	/*On utilise le module code igniter spécifique aux formulaires*/
     $this->load->library('form_validation');
 	/*Le login est obligatoire*/
-    $this->form_validation->set_rules('email', 'Identifiant', 'required');
+    $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 	/* Champs requis et taille minimale du mdp*/
     $this->form_validation->set_rules('password', 'Mot de passe', 'required|min_length[6]');
 
@@ -150,7 +194,8 @@ public function connexion(){
         if ( $res == true ) { 
         
 		/*On initialise des variables de session*/
-		$this->session->set_userdata('statut',$res['statut']);
+		
+		$this->session->set_userdata('statut',$res->statut);
 		  $this->session->set_userdata('login', $this->input->post('email'));
 		/*On redirige vers l'accueil*/
           $data['content']='accueil';
@@ -166,7 +211,7 @@ public function connexion(){
        
 		if($res == false){
 				
-			$data['notif']='<blockquote class="container">Identifiant inconnu</blockquote>';
+			$data['notif']='<blockquote class="container">Couple identifiant/mot de passe inconnu</blockquote>';
 		
 				
 		}
@@ -183,10 +228,4 @@ public function connexion(){
   
   
 }
-
-// ------------------------------------------------------------------------
-
-
-
-
  ?>

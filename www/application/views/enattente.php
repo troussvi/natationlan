@@ -1,61 +1,117 @@
 <?php
 
-
+	if($this->session->userdata('login')!==null){
+		
 	  if($this->session->userdata('statut')!=='ADMIN'){
 
 
-echo '<h3 class="container"> Vous navez pas les permissions </h3>';
- header('Location: accueil');
+		echo '<h3 class="container"> Vous n\'avez pas les permissions </h3>';
+		
+		 header('Location: accueil');
 
-}
+		}
+		
+		
+	
+	
 else{
 
 
 
 
-   if(isset($notif)){
-        
+	
+	
+	if(isset($notif)){
+				
+				echo '<blockquote class=\"row column text-center\">'.$notif.'</blockquote>';
+				
+				
+	}
 
-
-
-
-        echo $notif;
-
-        
-        
-    }
-
-
-echo "<table class=\"bordered container\">\n
+echo "<table class=\"row column text-center\">\n
 
           <tr>
           
-              <th data-field=\"nom\"></th>
-              <th data-field=\"prenom\">IdPokemon</th>
-			  <th data-field=\"email\">Nom</th>
+		
+              <th data-field=\"nom\">Nom</th>
+              <th data-field=\"prenom\">Prénom</th>
+			  <th data-field=\"email\">Email</th>
+			  <th data-field=\"Accepter\">Accepter</th>
+			  <th data-field=\"Refuser\">Refuser</th>
+			  
+
 
           </tr>";
-					echo'<FORM>';
+		  
+		  if($user==!null){
 
 					foreach($user as $lignes)
 					{
 						echo"\t<tr>\n";
-						foreach($lignes as $colonne)
-						{
+						echo form_open('lannionnatation/enattente/', 'class="form"'); 
+
 							echo"\t\t<td>";
-							echo $colonne;
+							
+							echo $lignes['nom'];
+							
+							echo form_hidden('nom', ''.$lignes['nom'].'');
+
+							
 							echo"</td>\n";
-						}
+						
+							echo"\t\t<td>";
+							
+							echo $lignes['prenom'];
+							
+							echo form_hidden('prenom', ''.$lignes['prenom'].'');
+
+						
+							echo"</td>\n";
+
+							echo"\t\t<td>";
+
+							echo $lignes['email'];
+
+							echo form_hidden('email', ''.$lignes['email'].'');
+
+							echo"</td>\n";
+							
+							
+							echo"\t\t<td>";
+
+							 echo form_submit('accepter', 'Accepter', 'class="button" style="background-color: #008CBA"');
+
+							
+							echo"</td>\n";
+							
+							echo"\t\t<td>";
+								
+							echo form_submit('refuser', 'Refuser', 'class="button" style="background-color: #008CBA"'); 
+							
+							
+							echo"</td>\n";
+							
+							echo form_close(); 
+							echo validation_errors(); 
+
                         
                         
 						echo"\t</tr>\n";
 					}
-					echo'</FORM>';
+			
+
+		}
+		}	
+
+	}
+	else{
+		
+		echo '<h3 class="container"> Vous n\'avez pas les permissions </h3>';
+		
+		header('Location: accueil');
+		
+		
+	}
 
 
-}
-
-
-
-
-            ?>
+  ?>

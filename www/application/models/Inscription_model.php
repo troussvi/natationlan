@@ -10,7 +10,7 @@ $this->load->database() ;
  public function verify_user($email, $password,$name,$firstname) {
  
      
-	$tab=array('nom'=>$name,'prenom'=>$firstname,'password'=>$password,'email'=>$email);
+	$tab=array('nom'=>$name,'prenom'=>$firstname,'password'=>md5($password),'email'=>$email);
      
      
      $q = $this
@@ -47,10 +47,6 @@ $this->load->database() ;
 
 				$this->db->insert('_utilisateurs', $tab);
 				
-				$this->db->set('login',$email);
-				$this->db->where('nom',$name);
-				$this->db->where('prenom',$firstname);
-				$this->db->update('_nageurs');
 				 
 				return false;
 

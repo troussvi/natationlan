@@ -12,7 +12,7 @@ $this->load->database() ;
      $q = $this
             ->db
             ->where('email', $login)
-            ->where('password',$password)
+            ->where('password',md5($password))
             ->limit(1)
             ->get('_utilisateurs');
 	
