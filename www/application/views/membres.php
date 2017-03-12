@@ -36,8 +36,8 @@ echo "<table class=\"row column text-center\">\n
               <th data-field=\"nom\">Nom</th>
               <th data-field=\"prenom\">Prénom</th>
 			  <th data-field=\"email\">Email</th>
-			  <th data-field=\"Accepter\">Accepter</th>
-			  <th data-field=\"Refuser\">Refuser</th>
+			  <th data-field=\"reinitialiser\">Réinitialiser MDP</th>
+			  <th data-field=\"supprimer\">Supprimer</th>
 			  
 
 
@@ -50,7 +50,7 @@ echo "<table class=\"row column text-center\">\n
 					foreach($user as $lignes)
 					{
 						echo"\t<tr>\n";
-						echo form_open('lannionnatation/enattente/', 'class="form"'); 
+						echo form_open('lannionnatation/membres/', 'class="form"'); 
 
 							echo"\t\t<td>";
 							
@@ -81,14 +81,14 @@ echo "<table class=\"row column text-center\">\n
 							
 							echo"\t\t<td>";
 
-							 echo form_submit('accepter', 'Accepter', 'class="button" style="background-color: #008CBA"');
+							 echo form_submit('reinit', 'Réinitialiser', 'class="button" style="background-color: #008CBA"');
 
 							
 							echo"</td>\n";
 							
 							echo"\t\t<td>";
 								
-							echo form_submit('refuser', 'Refuser', 'class="button" style="background-color: #008CBA"'); 
+							echo form_submit('supprimer', 'Supprimer', 'class="button" style="background-color: #008CBA"'); 
 							
 							
 							echo"</td>\n";

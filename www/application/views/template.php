@@ -41,11 +41,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 <?php 			
 		 
 	
-		 if($this->session->userdata('statut')!==null){
+		 if($this->session->userdata('statut')==='ADMIN'){
 					
 					
 			echo'<li><a href="/natationlan/www/index.php/lannionnatation/enattente">En attente</a></li>';
-			
+			echo'<li><a href="/natationlan/www/index.php/lannionnatation/membres">Membres</a></li>';
+
 					
 					
 		 }
@@ -56,10 +57,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       <div class="top-bar-right">
         <ul class="menu">
 		<?php
+		
+		
 			if($this->session->userdata('login')!==null){
 				
-				echo'<li>Connecté en temps que '.$this->session->userdata("login").'</li>';	 
 				
+				$hello=strtolower($this->session->userdata("prenom"));
+				$hello{0}=strtoupper($hello{0});
+				
+				echo'<li>Connecté en temps que '.$hello.' - </li>';	 
+				
+				echo'<li><a href="/natationlan/www/index.php/lannionnatation/profil" class="button" style="background-color: #008CBA">Profil</a></li>';
 				echo'<li><a href="/natationlan/www/index.php/lannionnatation/deconnexion" class="button" style="background-color: #008CBA">Déconnexion</a></li>';
 				
 	

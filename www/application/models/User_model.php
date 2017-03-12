@@ -18,13 +18,36 @@ $this->load->database() ;
 	
 
 	
-	
-	  if ( $q->num_rows = 1 ) {
+	  if ( $q->num_rows() == 1 ) {
 		  
-         return $q->row();
+		  
+		  
+		     $q = $this
+            ->db
+            ->where('email', $login)
+            ->where('password',md5($password))
+			->where('attente',false)
+            ->limit(1)
+            ->get('_utilisateurs');
+		  
+		  $nbrows=$q->num_rows();
+		  
+		  
+		  
+		  if($nbrows==1){
+			  
+			 return $q->row();
+
+			  
+		  }
+		  else{
+			  
+			  return false;
+			  
+		  }
+		  
       }
 	  else{
-		  
 		  
       return false;
 	  

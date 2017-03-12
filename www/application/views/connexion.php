@@ -17,7 +17,7 @@
 					
 					<a href="mdp_oublie.php" class="float-right">Mot de passe oublie</a>
 					</br>
-						<?php echo form_submit('send', 'Envoyer', 'class="btn btn-default"'); ?>
+						<?php echo form_submit('send', 'Envoyer', 'class="button"'); ?>
 						<?php echo form_close(); ?>
 						<?php echo validation_errors(); ?>
 					<center>

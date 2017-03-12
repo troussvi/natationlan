@@ -30,6 +30,8 @@ public function deconnexion(){
 	$this->session->sess_destroy();
     $this->session->set_userdata('login',NULL);
 	$this->session->set_userdata('statut',NULL);
+	$this->session->set_userdata('nom',NULL);
+	$this->session->set_userdata('prenom',NULL);
 
 	$this->accueil();
 	
@@ -38,9 +40,8 @@ public function deconnexion(){
 
 public function inscription(){
 	
-	$this->load->library('encryption');
     $this->load->library(array('form_validation'));
-    $this->form_validation->set_rules('email', 'Email', 'required|is_unique[_utilisateurs.email]');
+    $this->form_validation->set_rules('email', 'Email', 'required');
     $this->form_validation->set_rules('password', 'Mot de passe', 'required|min_length[6]');
     $this->form_validation->set_rules('password2', 'Mot de passe', 'required|min_length[6]');
 
@@ -49,7 +50,8 @@ public function inscription(){
 	 
       if ( $this->form_validation->run() !== false) {
 
-	  $this->load->model('Inscription_model');
+		$this->load->model('Inscription_model');
+		//mdp renseignés identiques
 		if(($this->input->post('password')==$this->input->post('password2'))){
 
 			$res = $this
@@ -60,7 +62,7 @@ public function inscription(){
 						$this->input->post('name'),
 						$this->input->post('firstname')
 					 );
-				if ( $res == false ) { 
+				if ( $res ==! false ) { 
 
 						$data['notif']='Demande en cours de traitement,vous recevrez un mail lorsque votre compte sera validé';
 						$data['content']='inscription';
@@ -68,13 +70,20 @@ public function inscription(){
 						$this->load->view('template');
 						return 0;
 				}
+				
+				else{
+					
+					
+					$data['notif']='<blockquote class="container">Cette adresse email est déjà utlisée</blockquote>';
+					
+				}
 		}
-						else{
+		else{
 								
-							$data['notif']='<blockquote class="container">Les deux mots de passe doivent être identiques</blockquote>';
+			$data['notif']='<blockquote class="container">Les deux mots de passe doivent être identiques</blockquote>';
 
 								
-						}
+		}
 	  }
 	
     
@@ -88,6 +97,66 @@ public function inscription(){
 	
 	
 }
+
+public function membres(){
+	$this->load->library('form_validation');
+	$this->load->model('Privileges_model');
+	$this->load->model('Gestion_model');
+
+	
+		$res = $this
+					 ->Privileges_model
+					 ->Utilisateur(1);
+	
+	
+	if($this->input->post('reinit')!==null){
+
+			$res3 = $this
+					 ->Gestion_model
+					 ->reinit(
+						$this->input->post('email')
+					 );
+
+			$data['notif']='<blockquote class="container">Le mot de passe de '.$this->input->post('nom').' '.$this->input->post('prenom').' a été réinitialisé </blockquote>';
+
+	
+	}
+	
+	if($this->input->post('supprimer')!==null){
+	
+				
+			$res3 = $this
+					 ->Gestion_model
+					 ->supprimer(
+						$this->input->post('email'),
+						$this->input->post('nom'),
+						$this->input->post('prenom')
+					 );
+		
+		
+		$data['notif']='<blockquote class="container"> '.$this->input->post('nom').' '.$this->input->post('prenom').' a été supprimé de la base de données </blockquote>';
+		
+	}
+	
+	$res = $this
+					 ->Privileges_model
+					 ->Utilisateur(1);
+	
+	$data['user']=$res;
+    $data['content']='membres';
+    $data['title']='membres';
+    $this->load->vars($data);
+    $this->load->view('template');	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
 public function enattente(){
 	
 	$this->load->library('form_validation');
@@ -96,7 +165,7 @@ public function enattente(){
 	
 		$res = $this
 					 ->Privileges_model
-					 ->Utilisateur();
+					 ->Utilisateur(0);
 	
 
 	
@@ -104,7 +173,7 @@ public function enattente(){
 		
 		if($this->input->post('accepter')!==null){
 						 
-			$res = $this
+			$res2 = $this
                  ->Gestion_model
                  ->gestion(
                     $this->input->post('email'),
@@ -112,7 +181,13 @@ public function enattente(){
 					$this->input->post('prenom'),
                     1
                  );
-				 
+			/* A déployer sur le ftp, ne marche pas en local
+			$this->email->from('lannionnatation@gmail.com', 'Lannion natation');
+			$this->email->to($this->input->post('email'));
+			$this->email->subject('Votre compte sur lannion natation');
+			$this->email->message('Votre compte a bien été validé , vous pouvez maintenant vous connecter et accéder à votre profil');	
+			$this->email->send();
+			*/	 
 		
 			$nom=$this->input->post('nom');
 			$prenom=$this->input->post('prenom');
@@ -124,23 +199,36 @@ public function enattente(){
 	
 		if($this->input->post('refuser')!==null){
 			
-		$res = $this
-                 ->Gestion_model
-                 ->gestion(
-                    $this->input->post('email'),
-					$this->input->post('nom'),
-					$this->input->post('prenom'),
-                    0
-                 );
-				 
-		$nom=$this->input->post('nom');
-		$prenom=$this->input->post('prenom');
-		$notif="$nom $prenom a été acceptée ";
-		$data['notif']=$notif;	 
+			$res3 = $this
+					 ->Gestion_model
+					 ->gestion(
+						$this->input->post('email'),
+						$this->input->post('nom'),
+						$this->input->post('prenom'),
+						0
+					 );
+			$this->load->library('email');
+
+			/* A déployer sur le ftp, ne marche pas en local
+			$this->email->from('lannionnatation@gmail.com', 'Lannion natation');
+			$this->email->to($this->input->post('email'));
+			$this->email->subject('Votre compte sur lannion natation');
+			$this->email->message('Votre compte a bien été validé , vous pouvez maintenant vous connecter et accéder à votre profil');	
+			$this->email->send();
+			*/
+					 
+					 
+			$nom=$this->input->post('nom');
+			$prenom=$this->input->post('prenom');
+			$notif="$nom $prenom a été refusé(e) ";
+			$data['notif']=$notif;	 
 		}
 	
 		
 
+	$res = $this
+				->Privileges_model
+				->Utilisateur(0);
 	
 	
 	
@@ -195,13 +283,17 @@ public function connexion(){
         
 		/*On initialise des variables de session*/
 		
-		$this->session->set_userdata('statut',$res->statut);
+		  $this->session->set_userdata('statut',$res->statut);
+		  $this->session->set_userdata('nom',$res->nom);
+		  $this->session->set_userdata('prenom',$res->prenom);
 		  $this->session->set_userdata('login', $this->input->post('email'));
 		/*On redirige vers l'accueil*/
           $data['content']='accueil';
-          $idConn=$this->session->userdata('login');
+          $idConn=$this->session->userdata('nom');
+          $idConn2=$this->session->userdata('prenom');
+		  
           
-                     $data['notif']='<blockquote class="container">Vous êtes connecté en tant que '.$idConn.' !</blockquote>';
+                     $data['notif']='<blockquote class="container">Vous êtes connecté en tant que '.$idConn.' '.$idConn2.'  !</blockquote>';
 
             $this->load->vars($data);
             $this->load->view('template');
@@ -211,10 +303,13 @@ public function connexion(){
        
 		if($res == false){
 				
-			$data['notif']='<blockquote class="container">Couple identifiant/mot de passe inconnu</blockquote>';
+			$data['notif']='<blockquote class="container">Couple identifiant/mot de passe non validé</blockquote>';
 		
 				
 		}
+		
+		
+	
 		
     }
 

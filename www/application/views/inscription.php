@@ -43,7 +43,7 @@ echo form_open('lannionnatation/inscription', 'class="form"');
 
 			  
 			<p class="pull-right">
-			  <?php echo form_submit('send', 'Envoyer', 'class="btn btn-default"'); ?>
+			  <?php echo form_submit('send', 'Envoyer', 'class="button"'); ?>
 			</p>
 
 			  <?php echo form_close(); ?>

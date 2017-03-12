@@ -9,53 +9,50 @@ $this->load->database() ;
 
  public function verify_user($email, $password,$name,$firstname) {
  
-     
+ //on met nom et prénom en majuscule pour éviter les pb de doublons
+     $name=strtoupper($name);
+	 $firstname=strtoupper($firstname);
+//tableau des infos de l'utilisateur
 	$tab=array('nom'=>$name,'prenom'=>$firstname,'password'=>md5($password),'email'=>$email);
      
      
+	 //on regarde si l'email est déjà répertorié
      $q = $this
             ->db
             ->where('email', $email)
-            ->where('password',$password)
             ->limit(1)
             ->get('_utilisateurs');
 
 
+	$nbrows=$q->num_rows();
 
-
-
-      if ( $q->num_rows = 0 ) {
+	//si in'est pas répertorié
+      if ( $nbrows == 0 ) {
         
-        return true;     
-         
-      }
-      else{
-          
-		  $q=$this
-				->db
-				->where('nom',$name)
-				->where('prenom',$firstname)
-				->get('_nageurs');
-				
-			if($q->num_rows=0){
+
+				$this->db->insert('_utilisateurs', $tab);
 				
 				return true;
 				
 			}
-			
-			else{
 
-				$this->db->insert('_utilisateurs', $tab);
-				
-				 
-				return false;
-
-			}
+		
+		
+         
+      
+	  
+	  
+      else{
+		  
+		  
+		  return false;
+		  
+	
 	 }
       
+ }  
       
       
       
-      
-  }
+  
 }
