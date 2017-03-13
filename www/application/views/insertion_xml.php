@@ -15,8 +15,9 @@
 		
 			echo form_open('lannionnatation/insertionxml', 'class="form"'); ?>
 ?>
-			<div class="row">
-		<div class="small-6 large-centered columns"> 
+
+		<div class="row">
+		 <div class="large-6 columns">
 			<fieldset class="fieldset">
 				<center> <h2>Importation de résultat via fichier xml</h2> <center>
 					</br> 	
@@ -37,16 +38,16 @@
 						</fieldset>
 			</div>
 
-		</div>
 		
 		
-<?php
-	echo '<div class="container">';
-		echo form_open('lannionnatation/importer_resultat', 'class="form"'); ?>
+		
+		<?php
+			echo '<div class="container">';
+				echo form_open('lannionnatation/importer_resultat', 'class="form"'); ?>
 	
 		
-			<div class="row">
-				<div class="small-6 large-centered columns"> 
+			
+				<div class="large-6 columns"> 
 					<fieldset class="fieldset">
 					<center> <h2>Ajout de record pour un nageur</h2> <center>
 					</br> 	
@@ -75,7 +76,8 @@
 					</fieldset>
 				</div>
 
-			</div>		
+			</div>	
+		</div>
 		
 	<?php	
 	}	
