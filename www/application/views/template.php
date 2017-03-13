@@ -45,9 +45,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 		 if($this->session->userdata('statut')==='ADMIN'){
 					
-					
-			echo'<li><a href="/natationlan/www/index.php/lannionnatation/enattente">En attente</a></li>';
-			echo'<li><a href="/natationlan/www/index.php/lannionnatation/membres">Membres</a></li>';
+		echo'<li><a href="/natationlan/www/index.php/lannionnatation/insertionxml">Saisir temps</a></li>';
+		echo'<li><a href="/natationlan/www/index.php/lannionnatation/enattente">En attente</a></li>';
+		echo'<li><a href="/natationlan/www/index.php/lannionnatation/membres">Membres</a></li>';
 
 					
 					

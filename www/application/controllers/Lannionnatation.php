@@ -172,6 +172,20 @@ public function membres(){
 }
 
 
+
+public function insertionxml(){
+	
+	$this->load->library('form_validation');
+	
+	$data['content']='insertion_xml';
+	$data['title']='Insérer un temps';
+	$this->load->vars($data);
+	$this->load->view('template');
+	   
+	
+	
+}
+
 public function enattente(){
 	
 	$this->load->library('form_validation');
