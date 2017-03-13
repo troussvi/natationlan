@@ -38,10 +38,16 @@ echo form_open('lannionnatation/inscription', 'class="form"');
 			  <?php echo form_label('Mot de passe:', 'password'); ?>
 			  <?php echo form_password('password', '', 'class="form-control" id="password"'); ?>
 
-			  <?php echo form_label('Mot de passe:', 'password2'); ?>
+			  <?php echo form_label('Confirmer :', 'password2'); ?>
 			  <?php echo form_password('password2', '', 'class="form-control" id="password"'); ?>
-
+			
+			
 			  
+				
+							  
+				
+			
+				
 			<p class="pull-right">
 			  <?php echo form_submit('send', 'Envoyer', 'class="button"'); ?>
 			</p>
@@ -54,3 +60,5 @@ echo form_open('lannionnatation/inscription', 'class="form"');
 	  </fieldset>
   </div>
 </div>
+
+

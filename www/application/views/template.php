@@ -9,6 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title><?php echo $content; ?></title>
     <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 
+
 </head>
   <body>
     <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
@@ -35,7 +36,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <ul class="menu">
 		
 		
-          <li class="menu-text"><a href="/natationlan/www/index.php/lannionnatation/accueil">Lannion natation</a></li>
+          <li class="menu-text" <?php if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/accueil"){echo 'style="background-color :#000033"';}
+		echo '><a href="/natationlan/www/index.php/lannionnatation/accueil">Lannion natation</a></li>'; ?>
           <li><a href="#">Liste des nageurs</a></li>
           <li><a href="#">Record du club</a></li>
 		 <?php 			
@@ -65,18 +67,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$hello=strtolower($this->session->userdata("prenom"));
 				$hello{0}=strtoupper($hello{0});
 				
-				echo'<li>Connecté en temps que '.$hello.' - </li>';	 
+				echo'<li>Connecté en temps que '.$hello.' -	 </li>';	 
 				
-				echo'<li><a href="/natationlan/www/index.php/lannionnatation/profil" class="button" style="background-color: #008CBA">Profil</a></li>';
-				echo'<li><a href="/natationlan/www/index.php/lannionnatation/deconnexion" class="button" style="background-color: #008CBA">Déconnexion</a></li>';
+			
+				echo'<li><a href="/natationlan/www/index.php/lannionnatation/monprofil"'; 	
+				if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/monprofil"){echo 'style="background-color :#000033"';}else{ echo'style="background-color: #008CBA"';} echo 'class="button" >Profil</a></li>';
+				echo'<li><a href="/natationlan/www/index.php/lannionnatation/deconnexion"';
+				if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/deconnexion"){echo 'style="background-color :#000033"';}else{ echo'style="background-color: #008CBA"';} echo 'class="button" style="background-color: #008CBA">Déconnexion</a></li>';
 				
 	
 				
 			}
 		
 			else{
-				echo'<li><a href="/natationlan/www/index.php/lannionnatation/inscription" class="button" style="background-color: #008CBA">Inscription</a></li>';
-				echo'<li><a href="/natationlan/www/index.php/lannionnatation/connexion" class="button" style="background-color: #008CBA">Connexion</a></li>';
+				echo'<li><a href="/natationlan/www/index.php/lannionnatation/inscription"';
+				if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/inscription"){echo 'style="background-color :#000033"';}else{ echo'style="background-color: #008CBA"';} echo 'class="button" style="background-color: #008CBA">Inscription</a></li>';
+				echo'<li><a href="/natationlan/www/index.php/lannionnatation/connexion"';
+				if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/connexion"){echo 'style="background-color :#000033"';}else{ echo'style="background-color: #008CBA"';} echo 'class="button" style="background-color: #008CBA">Connexion</a></li>';
 			}
 			
 			

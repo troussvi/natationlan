@@ -26,6 +26,21 @@ public function accueil(){
 	
 }
 
+
+
+public function monprofil(){
+	
+	
+	$data['content']='monprofil';
+	$data['title']='Mon Profil';
+	$this->load->vars($data);
+	$this->load->view('template');
+	   
+	
+	
+	
+}
+
 public function deconnexion(){
 	$this->session->sess_destroy();
     $this->session->set_userdata('login',NULL);
@@ -117,7 +132,7 @@ public function membres(){
 						$this->input->post('email')
 					 );
 
-			$data['notif']='<blockquote class="container">Le mot de passe de '.$this->input->post('nom').' '.$this->input->post('prenom').' a été réinitialisé </blockquote>';
+			$data['notif']='<blockquote class="container">Le mot de passe de '.$this->input->post('nom').' '.$this->input->post('prenom').' a été réinitialisé (Lannion1) </blockquote>';
 
 	
 	}
