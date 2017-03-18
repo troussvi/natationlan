@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
+
+<script src="https://unpkg.com/flatpickr"></script>
+
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <?php
 echo '<div class="container">';
@@ -38,16 +42,15 @@ echo form_open('lannionnatation/inscription', 'class="form"');
 			  <?php echo form_label('Mot de passe:', 'password'); ?>
 			  <?php echo form_password('password', '', 'class="form-control" id="password"'); ?>
 
-			  <?php echo form_label('Confirmer :', 'password2'); ?>
+			  <?php echo form_label('Mot de passe:', 'password2'); ?>
 			  <?php echo form_password('password2', '', 'class="form-control" id="password"'); ?>
-			
-			
+
+			  <?php echo form_label('Mot de passe:', 'password2'); ?>
+			  <?php echo form_password('password2', '', 'class="form-control" id="password"'); ?>
 			  
-				
-							  
-				
-			
-				
+			  <div>Date de naissance:</div>
+			  <input class="input-group-field flatpickr" type="text" name="date"  required pattern="date"/> <br>	
+
 			<p class="pull-right">
 			  <?php echo form_submit('send', 'Envoyer', 'class="button"'); ?>
 			</p>
@@ -61,4 +64,9 @@ echo form_open('lannionnatation/inscription', 'class="form"');
   </div>
 </div>
 
-
+	<script>
+		flatpickr(".flatpickr", {
+			minDate: "1907-01-01",
+			maxDate: "2010-01-01",
+		});
+	</script>
