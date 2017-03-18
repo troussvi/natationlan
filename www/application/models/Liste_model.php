@@ -8,14 +8,19 @@ $this->load->database() ;
 
 }
 
- public function Nageurs() {
+ public function NageursSeniors() {
 			
 			
-			$query=$this->db->get('_nageurs');
 			
 			
+	 $sql=("SELECT * from lannionnatation._nageurs where DATE_PART('year',datenaissance)-DATE_PART('year', current_date)<-18");
+			
+			
+			$query=$this->db->query($sql);
 			return $query->result_array();
 			
+			
+	
 	
 		 
 		 
@@ -27,6 +32,24 @@ $this->load->database() ;
 		 
     
 
+ }
+ 
+ 
+ public function NageursJuniors(){
+	 
+	 		
+	 $sql=("SELECT * from lannionnatation._nageurs where DATE_PART('year',datenaissance)-DATE_PART('year', current_date)>-18");
+			
+			
+			$query=$this->db->query($sql);
+			return $query->result_array();
+			
+	 
+	 
+	 
+	 
+	 
+	 
  }
  
  }        	

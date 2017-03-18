@@ -181,9 +181,12 @@ public function liste(){
 	
 	$data['tab']=$this
 					 ->Liste_model
-					 ->Nageurs();
+					 ->NageursSeniors();
 					 
 					 
+	$data['tab2']=$this
+					 ->Liste_model
+					 ->NageursJuniors();
 	$data['content']='liste_nageur';
 	$data['title']='Liste des nageurs';
 	$this->load->vars($data);
@@ -194,6 +197,19 @@ public function liste(){
 	
 }
 
+
+public function profil(){
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
 
 
 public function insertionxml(){
