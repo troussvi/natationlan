@@ -3,25 +3,79 @@
 <section>
  
     <div id="Liste">    
-        <h1>Liste des nageurs </h1>
+      <center><h2>Liste des nageurs </h2></center>
+		
         <?php
-        $attributes = array('name' => 'form');
-            <table id="table_list" class="list_nageurs">
-                <?php
-                if($_nageurs != NULL):
-                foreach($_nageurs as $r):?>
-                <tr>
-                    <th class="td_nageurs">Nom</th>
-                    <th class="td_nageurs">Prenom</th>
-                    <th class="td_nageurs">E-mail</th>
-                </tr>
-                <tr id="<?php echo $r->idnageur;?>" class="defaut">
-                    <td class="td_nageurs"><?php echo $r->Nom;?></td>
-                    <td class="td_nageurs"><?php echo $r->Prenom;?></td>
-                </tr>
-                 
-                <?php endforeach; endif;?>
-            </table>
+		
+		echo "<table class=\"row column text-center\">\n
+
+          <tr>
+          
+		
+              <th data-field=\"nom\">Nom</th>
+              <th data-field=\"prenom\">Prénom</th>
+			  <th data-field=\"datenaissance\">Date naissance</th>
+			  
+
+
+          </tr>";
+		  
+		 
+		  
+		  if($tab==!null){
+			
+					foreach($tab as $lignes)
+					{
+						echo"\t<tr>\n";
+						echo form_open('lannionnatation/liste/', 'class="form"'); 
+
+							echo"\t\t<td>";
+							
+							echo $lignes['nom'];
+							
+							echo form_hidden('nom', ''.$lignes['nom'].'');
+
+							
+							echo"</td>\n";
+						
+							echo"\t\t<td>";
+							
+							echo $lignes['prenom'];
+							
+							echo form_hidden('prenom', ''.$lignes['prenom'].'');
+
+						
+							echo"</td>\n";
+
+							echo"\t\t<td>";
+
+							echo $lignes['datenaissance'];
+
+							echo form_hidden('datenaissance', ''.$lignes['datenaissance'].'');
+
+							echo"</td>\n";
+							
+							
+							echo form_close(); 
+							echo validation_errors(); 
+
+                        
+                        
+						echo"\t</tr>\n";
+					}
+			
+
+		}
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		?>
     </div>
      
 </section>

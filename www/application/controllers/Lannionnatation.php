@@ -7,6 +7,8 @@ parent::__construct();
 /* On chargera ici les modèles qu'on désire*/
 $this->load->model('User_model');
  $this->load->model('Privileges_model');
+  $this->load->model('Liste_model');
+
 /*On importe la librairie session*/
 $this->load->library('session');
 
@@ -165,6 +167,27 @@ public function membres(){
 	
 	
 	
+	
+	
+	
+	
+}
+
+
+public function liste(){
+	
+	$this->load->library('form_validation');
+	
+	
+	$data['tab']=$this
+					 ->Liste_model
+					 ->Nageurs();
+					 
+					 
+	$data['content']='liste_nageur';
+	$data['title']='Liste des nageurs';
+	$this->load->vars($data);
+	$this->load->view('template');
 	
 	
 	

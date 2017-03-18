@@ -1,4 +1,14 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+ 
+	<meta charset="UTF-8" />
+    <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+
+
+
 <?php 
+
 	if($this->session->userdata('login')!==null){
 		
 	  if($this->session->userdata('statut')!=='ADMIN'){
@@ -14,12 +24,13 @@
 	else{
 		
 			echo form_open('lannionnatation/insertionxml', 'class="form"'); ?>
-?>
+
+
 
 		<div class="row">
 		 <div class="large-6 columns">
 			<fieldset class="fieldset">
-				<center> <h2>Importation de résultat via fichier xml</h2> <center>
+				<center> <h2>Importation de r&eacutesultat via fichier xml</h2> <center>
 					</br> 	
 
 						<?php echo form_label('Votre fichier XML: ', 'fichXML'); ?>
@@ -31,7 +42,7 @@
 					
 
 					</br>
-						<input type="submit" name="submit" value="Importer" class="btn btn-primary">
+						<input type="submit" name="submit" value="Importer" class="button">
 						<?php echo form_close(); ?>
 						<?php echo validation_errors(); ?>
 					<center>
@@ -78,6 +89,7 @@
 
 			</div>	
 		</div>
+		</html>
 		
 	<?php	
 	}	
