@@ -28,6 +28,9 @@ else{
 					
 		}
 		
+		
+		echo '<u><h2><center>Profil de '.$nom.'</center></h2></u>';
+		
 
 			
 

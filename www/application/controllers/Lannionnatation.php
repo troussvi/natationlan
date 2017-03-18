@@ -200,7 +200,18 @@ public function liste(){
 
 public function profil(){
 	
+	$this->load->library('form_validation');
 	
+	
+		$nom=strtolower($this->input->post("nom"));
+		$nom{0}=strtoupper($nom{0});
+	
+	$data['nom']=''.$this->input->post('prenom').' '.$nom.'';
+	
+	$data['content']='monprofil';
+	$data['title']='Profil';
+	$this->load->vars($data);
+	$this->load->view('template');
 	
 	
 	
