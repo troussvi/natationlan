@@ -5,8 +5,9 @@
     <div id="Liste">    
 		
         <?php
-		
-		echo "<table class=\"row column text-center\">\n
+
+        echo '<div class="row"><center><h2>Liste des nageurs</h2><center></div><br><br>';
+		echo "<div class=\"expanded row\"><div class=\"large-5 large-offset-1 columns\"><table class=\"row column text-center\">\n
 
           <tr>
           
@@ -22,7 +23,7 @@
 		 
 		  
 		  if($tab==!null){
-				echo '<u><h2><center>Seniors</center></h2></u>';
+				echo '<u><h2><center>Dames</center></h2></u>';
 
 					foreach($tab as $lignes)
 					{
@@ -50,18 +51,8 @@
 
 							echo"\t\t<td>";
 								
-							//descriptif du bouton	
-							$data = array(
-								'name' => 'profil',
-								'id' => 'button',
-								'value' => 'mdr',
-								'type' => 'submit',
-								'content' => '<i class="large material-icons">zoom_in</i>'
-
-							);
-		
-							echo form_button($data);			
-							
+			
+							echo '<a href="/natationlan/www/index.php/lannionnatation/nageur?id='.$lignes['idnageur'].'"><i class="large material-icons">zoom_in</i></a>';							
 							
 							echo"</td>\n";
 							
@@ -74,13 +65,13 @@
 						echo"\t</tr>\n";
 						
 					}
-						echo '</table>';
+						echo '</table></div>';
 			
 			
 		}
 		
 			  if($tab2==!null){
-			  		echo '<u><h2><center>Juniors</center></h2></u>';
+			  		echo '<div class="large-5 large-offset-1 columns"><u><h2><center>Messieurs</center></h2></u>';
 
 					echo "<table class=\"row column text-center\">\n
 
@@ -121,16 +112,7 @@
 							echo"\t\t<td>";
 								
 							//descriptif du bouton	
-							$data = array(
-								'name' => 'profil',
-								'id' => 'button',
-								'value' => 'mdr',
-								'type' => 'submit',
-								'content' => '<i class="large material-icons">zoom_in</i>'
-
-							);
-		
-							echo form_button($data);			
+							echo '<a href="/natationlan/www/index.php/lannionnatation/nageur?id='.$lignes['idnageur'].'"><i class="large material-icons">zoom_in</i></a>';
 							
 							
 							echo"</td>\n";
@@ -144,7 +126,7 @@
 						echo"\t</tr>\n";
 					}
 			
-						echo '</table>';
+						echo '</table></div></div>';
 
 		}
 			

@@ -8,7 +8,7 @@ parent::__construct();
 $this->load->model('User_model');
  $this->load->model('Privileges_model');
   $this->load->model('Liste_model');
-
+  $this->load->model('Nageur_model');
 /*On importe la librairie session*/
 $this->load->library('session');
 
@@ -181,12 +181,12 @@ public function liste(){
 	
 	$data['tab']=$this
 					 ->Liste_model
-					 ->NageursSeniors();
+					 ->NageursFeminin();
 					 
 					 
 	$data['tab2']=$this
 					 ->Liste_model
-					 ->NageursJuniors();
+					 ->NageursMasculin();
 	$data['content']='liste_nageur';
 	$data['title']='Liste des nageurs';
 	$this->load->vars($data);
@@ -214,12 +214,27 @@ public function profil(){
 	$this->load->view('template');
 	
 	
+}
+
+public function nageur(){
 	
+	if(isset($_GET['id'])){
+
+	$this->load->library('form_validation');
+						 
+					 
+	$data['tab']=$this
+					 ->Nageur_model
+					 ->get_nageur($_GET['id']);
+	$data['tab2']=$this
+					 ->Nageur_model
+					 ->get_perf($_GET['id']);			 					 					 
+	$data['content']='profil';
+	$data['title']='Nageur n°'.$_GET['id'].'';
+	$this->load->vars($data);
+	$this->load->view('template');
 	
-	
-	
-	
-	
+	}
 }
 
 
