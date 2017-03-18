@@ -35,12 +35,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="top-bar">
       <div class="top-bar-left">
         <ul class="menu">
+	
 		
-		
-          <li class="menu-text" <?php if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/accueil"){echo 'style="background-color :#000033"';}
+          <li class="menu-text" <?php if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/accueil"){echo 'style="border-radius: 20px"';}
 		echo '><a href="/natationlan/www/index.php/lannionnatation/accueil">Lannion natation</a></li>'; ?>
 		
-          <li <?php if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/liste"){echo 'style="background-color :#000033"';}
+          <li <?php if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/liste"){echo 'style="border-radius: 20px;font-weight: bold"';}
 		echo '><a href="/natationlan/www/index.php/lannionnatation/liste">Liste des nageurs</a></li>'; ?>
      
 
