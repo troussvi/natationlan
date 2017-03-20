@@ -16,16 +16,10 @@ $this->load->database() ;
 
 
 		function get_perf($id){
-	 		$sql=("SELECT idperf from lannionnatation.realise where idnageur=".$id."");
+	 		$sql=("SELECT * from lannionnatation.realise natural join lannionnatation.performance natural join lannionnatation.type_epreuve where idnageur=".$id."");
 			$query=$this->db->query($sql);
 			return $query->result_array(); 	
 		}
 	
-
-		function get_donnees_perf($idperf){
-	 		$sql=("SELECT * from lannionnatation.performance where idperf=".$idperf."");
-			$query=$this->db->query($sql);
-			return $query->result_array(); 			
-		}
 }
 ?>

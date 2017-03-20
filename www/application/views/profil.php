@@ -20,8 +20,11 @@
 
 				  <tr>		  
 				
-					  <th data-field=\"nom\">idperf</th>
-					  
+					  <th data-field=\"nom\"> Date </th>
+					  <th data-field=\"nom\"> Compétition</th>
+					  <th data-field=\"nom\"> Nage </th>
+					  <th data-field=\"nom\"> Temps </th>
+
 				  </tr>";	
 
 					foreach($tab2 as $lignes)
@@ -31,14 +34,40 @@
 						echo form_open('lannionnatation/profil', 'class="form"'); 
 							echo"\t\t<td>";
 							
-							echo $lignes['idperf'];
+							echo $lignes['datecompet'];
 							
-							echo form_hidden('idperf', ''.$lignes['idperf'].'');
+							echo form_hidden('datecompet', ''.$lignes['datecompet'].'');
 
 							
 							echo"</td>\n";
+
+							echo"\t\t<td>";
 							
+							echo $lignes['nomcompet'];
 							
+							echo form_hidden('nomcompet', ''.$lignes['nomcompet'].'');
+
+							
+							echo"</td>\n";							
+							
+							echo"\t\t<td>";
+							
+							echo $lignes['nomEpreuve'];
+							
+							echo form_hidden('nomEpreuve', ''.$lignes['nomEpreuve'].'');
+
+							
+							echo"</td>\n";
+
+							echo"\t\t<td>";
+							
+							echo $lignes['tempsperf'];
+							
+							echo form_hidden('tempsperf', ''.$lignes['tempsperf'].'');
+
+							
+							echo"</td>\n";
+																					
 							echo form_close(); 
 							echo validation_errors(); 
 

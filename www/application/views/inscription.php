@@ -3,6 +3,7 @@
 <script src="https://unpkg.com/flatpickr"></script>
 
 <script src="https://www.google.com/recaptcha/api.js"></script>
+<script src="../../js/fr.js"></script>
 <?php
 echo '<div class="container">';
 echo form_open('lannionnatation/inscription', 'class="form"'); 
