@@ -229,7 +229,7 @@ public function nageur(){
 	$data['tab2']=$this
 					 ->Nageur_model
 					 ->get_perf($_GET['id']);			 					 					 
-	$data['content']='profil';
+	$data['content']='Profil';
 	$data['title']='Nageur n°'.$_GET['id'].'';
 	$this->load->vars($data);
 	$this->load->view('template');

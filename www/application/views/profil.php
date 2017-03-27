@@ -9,7 +9,17 @@
 		  if($tab==!null){
 		  			foreach($tab as $lignes)
 					{				
-						echo '<div class="row"><h2><center>Profil de "<i>'.$lignes['nom'].' '.$lignes['prenom'].'</i>"</center></h2></div><br><br>';
+						echo '<div class="row"><h2><center>Profil de "<i>'.$lignes['nom'].' '.$lignes['prenom'].'</i>"</center></h2></div><hr><br><br>';
+						echo '<div class="row">
+								<div class="large-5 columns large-offset-2 columns">
+							  	<form>
+									<select name="datecompet" size="1">
+										<option>2017
+										<option>2016
+									</select>
+							  	</form>
+							  	</div>
+							  	</div>';
 					}
 			}
 
