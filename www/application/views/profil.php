@@ -24,7 +24,7 @@
 	
 
 
-					echo "<table id=\"myTable\" class=\"row column text-center\">\n
+					echo "<br><table id=\"myTable\" class=\"row column text-center\">\n
 
 				  <tr>		  
 				
@@ -39,12 +39,10 @@
 					{
 
 						echo"\t<tr>\n";
-						echo form_open('lannionnatation/profil', 'class="form"'); 
+
 							echo"\t\t<td>";
 							
 							echo $lignes['nomEpreuve'];
-							
-							echo form_hidden('nomEpreuve', ''.$lignes['nomEpreuve'].'');
 
 							
 							echo"</td>\n";
@@ -52,34 +50,21 @@
 							echo"\t\t<td>";
 							
 							echo $lignes['nomcompet'];
-							
-							echo form_hidden('nomcompet', ''.$lignes['nomcompet'].'');
 
-							
 							echo"</td>\n";							
 							
 							echo"\t\t<td>";
 							
 							echo $lignes['datecompet'];
-							
-							echo form_hidden('datecompet', ''.$lignes['datecompet'].'');
 
-							
 							echo"</td>\n";
 
 							echo"\t\t<td>";
 							
 							echo $lignes['tempsperf'];
 							
-							echo form_hidden('tempsperf', ''.$lignes['tempsperf'].'');
-
-							
 							echo"</td>\n";
-																					
-							echo form_close(); 
-							echo validation_errors(); 
-
-                        
+																					           
                         
 						echo"\t</tr>\n";
 					}

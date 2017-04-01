@@ -7,19 +7,13 @@
         <?php
 
         echo '
-		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
-
-		<script src="../../js/vendor/jquery.js"></script> 
-
-		<script src="../../js/vendor/foundation.min.js"></script>
-
 		<div class="row"><center><h2>Liste des nageurs</h2><center></div><br><br>';
         echo '<div class="expanded row">
         		<div class="large-5 columns">
-        		<input type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Rechercher un nageur">
+        		<input type="text" id="myInput1" onkeyup="myFunction1()" placeholder="Rechercher une nageuse">
         		</div>   		
         		<div class="large-5 columns large-offset-2 columns">
-        		<input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Rechercher une nageuse">
+        		<input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Rechercher un nageur">
         		</div>	
         	  </div><br><br>';
 		echo "<div class=\"expanded row\"><div class=\"large-5 columns\"><table id=\"myTable1\" class=\"row column text-center\">\n

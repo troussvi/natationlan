@@ -4,7 +4,7 @@ class Lannionnatation extends CI_Controller {
 public function __construct()
 {
 parent::__construct();
-/* On chargera ici les modèles qu'on désire*/
+/* On chargera ici les modÃ¨les qu'on dÃ©sire*/
 $this->load->model('User_model');
  $this->load->model('Privileges_model');
   $this->load->model('Liste_model');
@@ -68,7 +68,7 @@ public function inscription(){
       if ( $this->form_validation->run() !== false) {
 
 		$this->load->model('Inscription_model');
-		//mdp renseignés identiques
+		//mdp renseignÃ©s identiques
 		if(($this->input->post('password')==$this->input->post('password2'))){
 
 			$res = $this
@@ -81,7 +81,7 @@ public function inscription(){
 					 );
 				if ( $res ==! false ) { 
 
-						$data['notif']='Demande en cours de traitement,vous recevrez un mail lorsque votre compte sera validé';
+						$data['notif']='Demande en cours de traitement,vous recevrez un mail lorsque votre compte sera validÃ©';
 						$data['content']='inscription';
 						$this->load->vars($data);
 						$this->load->view('template');
@@ -91,13 +91,13 @@ public function inscription(){
 				else{
 					
 					
-					$data['notif']='<blockquote class="container">Cette adresse email est déjà utlisée</blockquote>';
+					$data['notif']='<blockquote class="container">Cette adresse email est dÃ©jÃ  utlisÃ©e</blockquote>';
 					
 				}
 		}
 		else{
 								
-			$data['notif']='<blockquote class="container">Les deux mots de passe doivent être identiques</blockquote>';
+			$data['notif']='<blockquote class="container">Les deux mots de passe doivent Ãªtre identiques</blockquote>';
 
 								
 		}
@@ -134,7 +134,7 @@ public function membres(){
 						$this->input->post('email')
 					 );
 
-			$data['notif']='<blockquote class="container">Le mot de passe de '.$this->input->post('nom').' '.$this->input->post('prenom').' a été réinitialisé (Lannion1) </blockquote>';
+			$data['notif']='<blockquote class="container">Le mot de passe de '.$this->input->post('nom').' '.$this->input->post('prenom').' a Ã©tÃ© rÃ©initialisÃ© (Lannion1) </blockquote>';
 
 	
 	}
@@ -151,7 +151,7 @@ public function membres(){
 					 );
 		
 		
-		$data['notif']='<blockquote class="container"> '.$this->input->post('nom').' '.$this->input->post('prenom').' a été supprimé de la base de données </blockquote>';
+		$data['notif']='<blockquote class="container"> '.$this->input->post('nom').' '.$this->input->post('prenom').' a Ã©tÃ© supprimÃ© de la base de donnÃ©es </blockquote>';
 		
 	}
 	
@@ -217,12 +217,7 @@ public function profil(){
 }
 
 public function nageur(){
-	
-	if(isset($_GET['id'])){
-
-	$this->load->library('form_validation');
-						 
-					 
+				 
 	$data['tab']=$this
 					 ->Nageur_model
 					 ->get_nageur($_GET['id']);
@@ -230,20 +225,53 @@ public function nageur(){
 					 ->Nageur_model
 					 ->get_perf($_GET['id']);			 					 					 
 	$data['content']='Profil';
-	$data['title']='Nageur n°'.$_GET['id'].'';
+	$data['title']='Nageur nÂ°'.$_GET['id'].'';
 	$this->load->vars($data);
 	$this->load->view('template');
 	
-	}
+	
 }
 
+public function records(){
+
+	$data['content']='Records';
+	$data['title']='Records';
+	$this->load->vars($data);
+	$this->load->view('template');
+}
+
+public function record(){
+
+	$this->load->model('Record_model');
+
+	$data['tab1']=$this
+				 ->Record_model
+				 ->get_record(25,'F');		 	 
+
+	$data['tab2']=$this
+				 ->Record_model
+				 ->get_record(50,'F');
+
+	$data['tab3']=$this
+				 ->Record_model
+				 ->get_record(25,'M');
+
+	$data['tab4']=$this
+				 ->Record_model
+				 ->get_record(50,'M');
+				 				 
+	$data['content']='Record';
+	$data['title']='Record';
+	$this->load->vars($data);
+	$this->load->view('template');
+}
 
 public function insertionxml(){
 	
 	$this->load->library('form_validation');
 	
 	$data['content']='insertion_xml';
-	$data['title']='Insérer un temps';
+	$data['title']='InsÃ©rer un temps';
 	$this->load->vars($data);
 	$this->load->view('template');
 	   
@@ -275,17 +303,17 @@ public function enattente(){
 					$this->input->post('prenom'),
                     1
                  );
-			/* A déployer sur le ftp, ne marche pas en local
+			/* A dÃ©ployer sur le ftp, ne marche pas en local
 			$this->email->from('lannionnatation@gmail.com', 'Lannion natation');
 			$this->email->to($this->input->post('email'));
 			$this->email->subject('Votre compte sur lannion natation');
-			$this->email->message('Votre compte a bien été validé , vous pouvez maintenant vous connecter et accéder à votre profil');	
+			$this->email->message('Votre compte a bien Ã©tÃ© validÃ© , vous pouvez maintenant vous connecter et accÃ©der Ã  votre profil');	
 			$this->email->send();
 			*/	 
 		
 			$nom=$this->input->post('nom');
 			$prenom=$this->input->post('prenom');
-			$notif="$nom $prenom a été acceptée ";
+			$notif="$nom $prenom a Ã©tÃ© acceptÃ©e ";
 			$data['notif']=$notif;	 
 	
 			
@@ -303,18 +331,18 @@ public function enattente(){
 					 );
 			$this->load->library('email');
 
-			/* A déployer sur le ftp, ne marche pas en local
+			/* A dÃ©ployer sur le ftp, ne marche pas en local
 			$this->email->from('lannionnatation@gmail.com', 'Lannion natation');
 			$this->email->to($this->input->post('email'));
 			$this->email->subject('Votre compte sur lannion natation');
-			$this->email->message('Votre compte a bien été validé , vous pouvez maintenant vous connecter et accéder à votre profil');	
+			$this->email->message('Votre compte a bien Ã©tÃ© validÃ© , vous pouvez maintenant vous connecter et accÃ©der Ã  votre profil');	
 			$this->email->send();
 			*/
 					 
 					 
 			$nom=$this->input->post('nom');
 			$prenom=$this->input->post('prenom');
-			$notif="$nom $prenom a été refusé(e) ";
+			$notif="$nom $prenom a Ã©tÃ© refusÃ©(e) ";
 			$data['notif']=$notif;	 
 		}
 	
@@ -345,7 +373,7 @@ public function enattente(){
 
 public function connexion(){
 
-	/*On utilise le module code igniter spécifique aux formulaires*/
+	/*On utilise le module code igniter spÃ©cifique aux formulaires*/
     $this->load->library('form_validation');
 	/*Le login est obligatoire*/
     $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
@@ -355,7 +383,7 @@ public function connexion(){
 	/*Si pas d'erreur lors de la soumission du formulaire*/
     if ( $this->form_validation->run() !== false ) {
 
-	/*On vérifie les param en les envoyant modèle User*/
+	/*On vÃ©rifie les param en les envoyant modÃ¨le User*/
 	$this->load->model('User_model');
 	$this->load->model('Privileges_model');
 	$res = $this
@@ -387,17 +415,17 @@ public function connexion(){
           $idConn2=$this->session->userdata('prenom');
 		  
           
-                     $data['notif']='<blockquote class="container">Vous êtes connecté en tant que '.$idConn.' '.$idConn2.'  !</blockquote>';
+                     $data['notif']='<blockquote class="container">Vous Ãªtes connectÃ© en tant que '.$idConn.' '.$idConn2.'  !</blockquote>';
 
             $this->load->vars($data);
             $this->load->view('template');
             return 0;
         }
-    /*Si il n'est pas dans la base de données*/
+    /*Si il n'est pas dans la base de donnÃ©es*/
        
 		if($res == false){
 				
-			$data['notif']='<blockquote class="container">Couple identifiant/mot de passe non validé</blockquote>';
+			$data['notif']='<blockquote class="container">Couple identifiant/mot de passe non validÃ©</blockquote>';
 		
 				
 		}

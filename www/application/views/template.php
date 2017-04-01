@@ -43,8 +43,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <li <?php if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/liste"){echo 'style="border-radius: 20px;font-weight: bold"';}
 		echo '><a href="/natationlan/www/index.php/lannionnatation/liste">Liste des nageurs</a></li>'; ?>
      
-
-	 <li><a href="#">Record du club</a></li>
+          <li <?php if($_SERVER['PHP_SELF']=="/natationlan/www/index.php/lannionnatation/record"){echo 'style="border-radius: 20px;font-weight: bold"';}
+		echo '><a href="/natationlan/www/index.php/lannionnatation/records">Record du club</a></li>'; ?>
 		 <?php 			
 		 
 	
