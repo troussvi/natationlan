@@ -7,13 +7,13 @@ $this->load->database() ;
 
 }
 
- public function verify_user($email, $password,$name,$firstname) {
+ public function verify_user($email, $password,$name,$firstname,$date,$sexe) {
  
  //on met nom et prénom en majuscule pour éviter les pb de doublons
      $name=strtoupper($name);
 	 $firstname=strtoupper($firstname);
 //tableau des infos de l'utilisateur
-	$tab=array('nom'=>$name,'prenom'=>$firstname,'password'=>md5($password),'email'=>$email);
+	$tab=array('nom'=>$name,'prenom'=>$firstname,'password'=>md5($password),'email'=>$email,'date'=>$date,'sexe'=>$sexe);
      
      
 	 //on regarde si l'email est déjà répertorié

@@ -61,7 +61,8 @@ public function inscription(){
     $this->form_validation->set_rules('email', 'Email', 'required');
     $this->form_validation->set_rules('password', 'Mot de passe', 'required|min_length[6]');
     $this->form_validation->set_rules('password2', 'Mot de passe', 'required|min_length[6]');
-
+    $this->form_validation->set_rules('date', 'Date de naissance', 'required');
+    $this->form_validation->set_rules('sexe', 'Sexe', 'required');
 
 	 
 	 
@@ -77,7 +78,9 @@ public function inscription(){
 						$this->input->post('email'),
 						$this->input->post('password'),
 						$this->input->post('name'),
-						$this->input->post('firstname')
+						$this->input->post('firstname'),
+						$this->input->post('date'),
+						$this->input->post('sexe')
 					 );
 				if ( $res ==! false ) { 
 

@@ -31,7 +31,14 @@ echo form_open('lannionnatation/inscription', 'class="form"');
 	  <fieldset class="fieldset">
 			<center><h2> Inscription </h2></center>
 			<br>
-			 <?php echo form_label('Nom: ', 'name'); ?>
+			 <center>
+			 <?php echo form_label('Homme: ', 'sexe'); ?>
+			  <?php echo form_radio('sexe', 'M', FALSE , 'class="form-control" id="sexe"'); ?>
+			  <br>
+			 <?php echo form_label('Femme: ', 'sexe'); ?>
+			  <?php echo form_radio('sexe', 'F', FALSE , 'class="form-control" id="sexe"'); ?>
+			</center>
+			 <br><?php echo form_label('Nom: ', 'name'); ?>
 			  <?php echo form_input('name', set_value('name'), 'class="form-control" id="name" autofocus'); ?>
 			  
 			  <?php echo form_label('Prénom: ', 'firstname'); ?>
@@ -45,14 +52,11 @@ echo form_open('lannionnatation/inscription', 'class="form"');
 
 			  <?php echo form_label('Mot de passe:', 'password2'); ?>
 			  <?php echo form_password('password2', '', 'class="form-control" id="password"'); ?>
-
-			  <?php echo form_label('Mot de passe:', 'password2'); ?>
-			  <?php echo form_password('password2', '', 'class="form-control" id="password"'); ?>
 			  
-			  <div>Date de naissance:</div>
-			  <input class="input-group-field flatpickr" type="text" name="date"  required pattern="date"/> <br>	
+			  <?php echo form_label('Date de naissance:', 'date'); ?>
+			  <?php echo form_password('date', set_value('date'), 'class="form-control input-group-field flatpickr" name="date" id="date" autofocus'); ?>
 
-			<p class="pull-right">
+			<br><p class="pull-right">
 			  <?php echo form_submit('send', 'Envoyer', 'class="button"'); ?>
 			</p>
 
