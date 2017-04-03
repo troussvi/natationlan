@@ -1,3 +1,63 @@
+<?php 
+function tempsEnCentieme($time){
+        $res = 0;
+        $str = str_split($time);
+        $trouve=False;
+        foreach ($str as $value){
+            if ($value == '.'){
+                $trouve = True;
+            }
+        }
+        if ($trouve == True){// si le nombre est à virgule
+            if (substr($time,-5,1)=='.'){//4 chiffres après la virgule
+                $cent=substr($time,-2,2);
+                $sec=substr($time,-4,2);
+            }
+            if (substr($time,-4,1)=='.'){//3 chiffres après la virgule
+                $cent=substr($time,-1);
+                $cent=(int)$cent;
+                $cent=$cent*10;
+                $sec=substr($time,-3,2);
+            }
+            if (substr($time,-3,1)=='.'){//2 chiffres après la virgule
+                $cent=0;
+                $sec=substr($time,-2,2);
+            }
+            if (substr($time,-2,1)=='.'){//1 chiffre après la virgule
+                $cent=0;
+                $sec=substr($time,-1,1);
+                $sec=$sec*10;
+            }
+            $res = floor($time)*60*100+$sec*100+$cent;
+        }else{
+            $res = $time*60*100;
+        }
+        return $res;
+    }
+
+
+
+function timeConvert($time){//convertie le temps en mm:ss:cc rajouter les heures avec un temps de base en centième
+        $res = $time;
+        $minTotal = $res/100/60;
+        $minRes = floor($minTotal);
+        $res = $res - $minRes*60*100;
+        $secTotal = $res/100;
+        $secRes = floor($secTotal);
+        $centRes = $res - $secRes*100;
+        $sec_length = strlen((string)$secRes);
+        if($sec_length <=1) {
+            $secRes = '0'.$secRes;
+        }
+        $cent_length = strlen((string)$centRes);
+        if($cent_length <=1) {
+            $centRes = '0'.$centRes;
+        }   
+        return $minRes.':'.$secRes.':'.$centRes;
+    }
+
+?>
+
 <html>
 <body>
 <section>
@@ -81,7 +141,7 @@ if (!empty($_POST)) {
 
 							echo"\t\t<td>";
 							
-							echo $lignes['tempsperf'];
+							echo timeConvert(tempsEnCentieme($lignes['tempsperf']));
 							
 							echo"</td>\n";							
 						
