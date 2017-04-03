@@ -22,6 +22,12 @@ $this->load->database() ;
 			return $query->result_array(); 	
 
 		}
+
+		function get_max_record($taillebassin,$sexe,$raceid){
+	 		$sql=("SELECT * FROM lannionnatation.performance natural join lannionnatation._typeepreuve natural join lannionnatation._nageurs where taillebassin=".$taillebassin." AND sexe='".$sexe."' AND raceid='".$raceid."' ORDER BY tempsperf LIMIT 1");
+			$query=$this->db->query($sql);
+			return $query->result_array(); 				
+		}
 	
 }
 ?>

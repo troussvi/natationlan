@@ -235,6 +235,14 @@ public function nageur(){
 	
 }
 
+public function graph(){
+
+	$data['content']='graph';
+	$data['title']='Graph';
+	$this->load->vars($data);
+	$this->load->view('template');
+}
+
 public function records(){
 
 	$data['content']='Records';
@@ -246,22 +254,88 @@ public function records(){
 public function record(){
 
 	$this->load->model('Record_model');
-
+//TAB FEMME
 	$data['tab1']=$this
 				 ->Record_model
-				 ->get_record(25,'F');		 	 
-
+				 ->get_max_record(25,'F',9);
 	$data['tab2']=$this
 				 ->Record_model
-				 ->get_record(50,'F');
-
+				 ->get_max_record(25,'F',12);	
 	$data['tab3']=$this
 				 ->Record_model
-				 ->get_record(25,'M');
-
+				 ->get_max_record(25,'F',22);
 	$data['tab4']=$this
 				 ->Record_model
-				 ->get_record(50,'M');
+				 ->get_max_record(25,'F',2);
+	$data['tab5']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',32);
+	$data['tab6']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',43);
+	$data['tab7']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',44);
+	$data['tab8']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',13);
+	$data['tab9']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',23);
+	$data['tab10']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',4);
+	$data['tab11']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',33);
+	$data['tab12']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',41);
+	$data['tab13']=$this
+				 ->Record_model
+				 ->get_max_record(25,'F',46);
+
+
+//TAB HOMME
+	$data['tab14']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',59);
+	$data['tab15']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',62);	
+	$data['tab16']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',72);
+	$data['tab17']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',52);
+	$data['tab18']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',82);
+	$data['tab19']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',93);
+	$data['tab20']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',94);
+	$data['tab21']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',63);
+	$data['tab22']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',73);
+	$data['tab23']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',54);
+	$data['tab24']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',83);
+	$data['tab25']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',91);
+	$data['tab26']=$this
+				 ->Record_model
+				 ->get_max_record(25,'M',96);
 				 				 
 	$data['content']='Record';
 	$data['title']='Record';
