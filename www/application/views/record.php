@@ -54,12 +54,12 @@ if (!empty($_POST)) {
        $tab=null;
     } else {
     	$tab=[];
-    	//VOIR COMMENT FAIRE AVEC LA BOUCLE C PA LOIN
+    	// On a essaye avec une boucle on est pas loin du coup c'est comme ça
     	//$cpt=0;
     	//$u=1;
     	//$i=0;
     	//while($cpt<13){
-    	//	$tab[$cpt]=$tab.$u[$i];
+    	//	$tab[$cpt]=$tab1[$i];
     	//	$u++;
     	//	$cpt++;
     	//}

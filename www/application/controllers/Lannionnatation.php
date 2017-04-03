@@ -236,9 +236,27 @@ public function nageur(){
 }
 
 public function graph(){
+	$this->load->model('Graph_model');
+
+	$data['res']=$this
+					 ->Graph_model
+					 ->get_nom_epreuve($_GET['id']);	
 
 	$data['content']='graph';
 	$data['title']='Graph';
+	$this->load->vars($data);
+	$this->load->view('template');
+}
+
+public function affich_graph(){
+	$this->load->model('Graph_model');
+
+	$data['res']=$this
+					 ->Graph_model
+					 ->requete_graph($_POST['type'],$_POST['username'],$_POST['bassin']);	
+
+	$data['content']='affich_graph';
+	$data['title']='Votre Graphique';
 	$this->load->vars($data);
 	$this->load->view('template');
 }
@@ -343,6 +361,219 @@ public function record(){
 	$this->load->view('template');
 }
 
+private function peuplement($name){	
+	function tempsEnCentieme($time){
+		$res = 0;
+		$str = str_split($time);
+		$trouve=False;
+		foreach ($str as $value){
+			if ($value == '.'){
+				$trouve = True;
+			}
+		}
+		if ($trouve == True){// si le nombre est à virgule
+			if (substr($time,-5,1)=='.'){//4 chiffres après la virgule
+				$cent=substr($time,-2,2);
+				$sec=substr($time,-4,2);
+			}
+			if (substr($time,-4,1)=='.'){//3 chiffres après la virgule
+				$cent=substr($time,-1);
+				$cent=(int)$cent;
+				$cent=$cent*10;
+				$sec=substr($time,-3,2);
+			}
+			if (substr($time,-3,1)=='.'){//2 chiffres après la virgule
+				$cent=0;
+				$sec=substr($time,-2,2);
+			}
+			if (substr($time,-2,1)=='.'){//1 chiffre après la virgule
+				$cent=0;
+				$sec=substr($time,-1,1);
+				$sec=$sec*10;
+			}
+			$res = floor($time)*60*100+$sec*100+$cent;
+		}else{
+			$res = $time*60*100;
+		}
+		return $res;
+	}
+
+	try
+	{
+		$connection=new PDO('pgsql:host=postgresql-natationlannion.alwaysdata.net;port=5432;dbname=natationlannion_nat','natationlannion','Lannion1');
+			$doc = new DomDocument;
+			$doc->load($name);// recupérer le nom du fichier ici
+			$noeudSwimmer = $doc->getElementsByTagName( "SWIMMER" );//where clubid=1160
+			
+			foreach( $noeudSwimmer as $noeudSwimmer )
+			{
+				if ($valueID = $noeudSwimmer->getAttribute('clubid')==1160){
+					$firstname = $noeudSwimmer->getAttribute('firstname');
+					$lastname = $noeudSwimmer->getAttribute('lastname');
+					$gender = $noeudSwimmer->getAttribute('gender');
+					$date = $noeudSwimmer->getAttribute('birthdate');
+					$idnageur = $noeudSwimmer->getAttribute('id');
+					$nageurs = $connection->prepare('SELECT * FROM lannionnatation._nageurs where nom = ? and prenom = ?');
+					$nageurs->bindParam(1, $lastname);
+					$nageurs->bindParam(2, $firstname);
+					$nageurs->execute();
+					$req=$nageurs->fetchAll();
+					$present = False;//sert à éviter les doublons dans la bdd
+					foreach ($req as $row){
+						$present = True;
+					}
+					if ($present == True){//si True alors on ajoute pas dans la bdd strtoupper
+						
+					}else{//sinon on ajoute le nuplet
+						$tableauSwimmer=array(':lastname'=>strtoupper($lastname),
+								':firstname'=>strtoupper($firstname),
+								':date'=>$date,
+								':login'=>NULL,
+								':sexe'=>$gender,
+								':idnageur'=>$idnageur);
+						$sth ="INSERT INTO lannionnatation._nageurs (nom, prenom, datenaissance,login,idnageur,sexe) VALUES(:lastname, :firstname, :date, :login ,:idnageur,:sexe);";
+						$req= $connection->prepare($sth);
+						$res=$req->execute($tableauSwimmer);
+					}
+				}
+			}
+
+		
+		//infos sur la compétition
+		$noeudMeet = $doc->getElementsByTagName( "MEET" );
+		foreach( $noeudMeet as $noeudMeet )
+		{
+			$nomCompet = $noeudMeet->getAttribute('name');//nomcompet
+			$dateCompet = $noeudMeet->getAttribute('startdate');//datecompet
+		}
+		
+		
+		$noeudPool = $doc->getElementsByTagName( "POOL" );
+		foreach( $noeudPool as $noeudPool )
+		{
+			$poolSize = $noeudPool->getAttribute('size');//taillebassin
+		}
+		
+		//traitement des résultats
+		$noeudResult = $doc->getElementsByTagName( "RESULT" );
+		foreach( $noeudResult as $noeudResult )
+		{
+			$idPerf = $noeudResult->getAttribute('id');//idperf
+			$raceid = $noeudResult->getAttribute('raceid');//raceid
+			$enfant=$noeudResult->firstChild;
+			$ifSolo = false; //Sert a séparer le traitement d'un resultat solo de relay
+			while ($enfant != null){
+				if ($enfant->nodeType == XML_ELEMENT_NODE && $enfant->nodeName == 'SOLO'){
+					$swimID = $enfant->getAttribute('swimmerid');
+					$ifSolo=true;
+				}
+				$enfant = $enfant->nextSibling;
+			}
+			if ($ifSolo == true){ //Si la course est une course de type SOLO
+				$enfant=$noeudResult->firstChild;
+				while ($enfant != null){
+					if ($enfant->nodeType == XML_ELEMENT_NODE && $enfant->nodeName == 'SOLO'){
+						$swimID = $enfant->getAttribute('swimmerid');						
+					}
+					if ($enfant->nodeType == XML_ELEMENT_NODE && $enfant->nodeName == 'SPLITS'){
+						
+						$nodeSplit = $enfant->getElementsByTagName("SPLIT");
+						foreach( $nodeSplit as $nodeSplit )
+						{
+							$swimtime = $nodeSplit->getAttribute('swimtime');
+						}
+						$swimtime = tempsEnCentieme($swimtime);
+						//echo ' ID nageur : '.$swimID.' Temps : '.timeConvert($swimtime).'</br>';
+						$tabInfos=array(':nomcompet'=>$nomCompet,
+								':datecompet'=>$dateCompet,
+								':taillebassin'=>$poolSize,
+								':tempsperf'=>$swimtime,
+								':raceid'=>$raceid,
+								':idnageur'=>$swimID);
+							$sth ="INSERT INTO lannionnatation.performance (nomcompet, datecompet, taillebassin, raceid, tempsperf, idnageur) VALUES(:nomcompet, :datecompet, :taillebassin, :raceid, :tempsperf, :idnageur );";
+							$req= $connection->prepare($sth);
+							$res=$req->execute($tabInfos);
+					}
+					$enfant = $enfant->nextSibling;
+					
+				}
+			}else{ //Si la course est une course de type RELAY
+				$enfant=$noeudResult->firstChild;
+				while ($enfant != null){
+					if ($enfant->nodeType == XML_ELEMENT_NODE && $enfant->nodeName == 'RELAY'){
+						
+						$searchNode5 = $enfant->getElementsByTagName("RELAYPOSITION");
+						$cpt = 0;
+						$swimID = array();
+						foreach( $searchNode5 as $searchNode5 )
+						{
+							if ($searchNode5->getAttribute('clubid') == 1160){
+								$cpt ++;
+								$swimmerid = $searchNode5->getAttribute('swimmerid');
+								array_push($swimID, $swimmerid);
+							}
+							
+						}
+					}
+					
+					if ($enfant->nodeType == XML_ELEMENT_NODE && $enfant->nodeName == 'SPLITS'){
+						$swimTIME = array();
+						$searchNode6 = $enfant->getElementsByTagName("SPLIT");
+						$aa = 0;
+						foreach( $searchNode6 as $searchNode6 )
+						{
+							if ($searchNode5->getAttribute('clubid') == 1160){
+								if ($aa >=1){
+									$Newswimtime = tempsEnCentieme($searchNode6->getAttribute('swimtime'));
+									$time = $Newswimtime-$swimtime;
+									array_push($swimTIME, $time);
+									$swimtime = $Newswimtime;
+								}else{
+									$swimtime = tempsEnCentieme($searchNode6->getAttribute('swimtime'));
+									array_push($swimTIME, $swimtime);
+								}
+							$aa++;
+							}
+							
+						}
+					}
+					$enfant = $enfant->nextSibling;
+				}
+				$cpt1 = 0;
+				foreach ($swimID as $value){// les deux boucles for suivantes servent à ajouter le bon temps à labonne personne
+					$cpt2 = 0;
+					$cpt3 = -1;
+					foreach ($swimTIME as $value2){
+						if ($cpt1 == $cpt2){
+							//insertion dans la bdd
+							$tabInfos=array(':nomcompet'=>$nomCompet,
+								':datecompet'=>$dateCompet,
+								':taillebassin'=>$poolSize,
+								':tempsperf'=>$value2,
+								':raceid'=>$raceid,
+								':idnageur'=>$value);
+							$sth ="INSERT INTO lannionnatation.performance (nomcompet, datecompet, taillebassin, raceid, tempsperf, idnageur) VALUES(:nomcompet, :datecompet, :taillebassin, :raceid, :tempsperf, :idnageur );";
+							$req= $connection->prepare($sth);
+							$res=$req->execute($tabInfos);
+							//fin de l'insertion
+						}
+						$cpt2++;
+						$cpt3++;
+					}
+					$cpt1++;
+				}
+			}			
+		}
+	}
+	catch (Exception $e)
+	{
+		echo'Erreur de connexion à la base de données';
+		   die('Erreur : ' . $e->getMessage());
+		   echo $e->getMessage();
+
+	}
+}
+
 public function insertionxml(){
 	
 	$this->load->library('form_validation');
@@ -351,10 +582,12 @@ public function insertionxml(){
 	$data['title']='Insérer un temps';
 	$this->load->vars($data);
 	$this->load->view('template');
-	   
-	
+	if ($this->input->post('sendxml')!==null){
+		$this->peuplement($_FILES['mon_fichier']['tmp_name']);
+	}
 	
 }
+
 
 public function enattente(){
 	

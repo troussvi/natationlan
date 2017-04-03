@@ -23,29 +23,25 @@
 		
 	else{
 		
-			echo form_open('lannionnatation/insertionxml/test8.php', 'class="form"'); ?>
+			echo form_open_multipart('lannionnatation/insertionxml', 'class="form"'); ?>
 
 
 
 		<div class="row">
 		 <div class="large-6 columns">
 			<fieldset class="fieldset">
-				<center> <label for="mon_fichier">Icône du fichier (XML | max. 15 Ko) :</label><br />
-      			<center>
-					</br> 	
-
-						<?php echo form_label('Votre fichier XML: ', 'fichXML'); ?>
-
-
-					<input type="file" name="mon_fichier" id="mon_fichier" /><br /><br><br>
-							
-					</form>
-					
-
+				<center> <h2>Fichier XML</h2> </br> <center>
 					</br>
-						<input type="submit" name="submit" value="Envoyer" />
-						<?php echo form_close(); ?>
-						<?php echo validation_errors(); ?>
+					<?php echo form_label('Votre fichier XML: ', 'fichXML'); ?>
+						
+					<input type="file" name="mon_fichier" id="mon_fichier" /><br /><br><br>
+					</br>
+					
+					<?php echo form_submit('sendxml', 'Valider', 'class="button"'); ?>
+					
+					<!-- <input type="submit" name="submit" value="Envoyer" /> -->
+					<?php echo form_close(); ?>
+					<?php echo validation_errors(); ?>
 					<center>
 						</fieldset>
 			</div>

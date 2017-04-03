@@ -44,7 +44,7 @@ function dateConvert($date){
 			        				<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher une nage">
 			        			</div>
 			        			<div class="large-2 columns">
-			        				<a href="/natationlan/www/index.php/lannionnatation/graph" style="background-color: #008CBA" class="button">Afficher un graphe </a>
+			        				<a href="/natationlan/www/index.php/lannionnatation/graph?id='.$_GET['id'].'" style="background-color: #008CBA" class="button">Afficher un graphe </a>
 			        			</div>
 			        		  </div> ';
 					}
