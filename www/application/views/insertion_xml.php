@@ -23,26 +23,27 @@
 		
 	else{
 		
-			echo form_open('lannionnatation/insertionxml', 'class="form"'); ?>
+			echo form_open('lannionnatation/insertionxml/test8.php', 'class="form"'); ?>
 
 
 
 		<div class="row">
 		 <div class="large-6 columns">
 			<fieldset class="fieldset">
-				<center> <h2>Importation de r&eacutesultat via fichier xml</h2> <center>
+				<center> <label for="mon_fichier">Icône du fichier (XML | max. 15 Ko) :</label><br />
+      			<center>
 					</br> 	
 
 						<?php echo form_label('Votre fichier XML: ', 'fichXML'); ?>
 
 
-					<input type="file" name="userfile" ><br><br>
+					<input type="file" name="mon_fichier" id="mon_fichier" /><br /><br><br>
 							
 					</form>
 					
 
 					</br>
-						<input type="submit" name="submit" value="Importer" class="button">
+						<input type="submit" name="submit" value="Envoyer" />
 						<?php echo form_close(); ?>
 						<?php echo validation_errors(); ?>
 					<center>
